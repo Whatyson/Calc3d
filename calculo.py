@@ -46,7 +46,7 @@ aplicar_estilo_customizado()
 DB_CONFIG = {
     "user": "sa",
     "pass": "basf2533", 
-    "server": "contec1.duckdns.org:1433",
+    "server": "116.203.137.247:1433",
     "database": "TEST_PY"
 }
 
