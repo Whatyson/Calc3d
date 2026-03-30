@@ -90,17 +90,17 @@ def aplicar_estilo_customizado():
 aplicar_estilo_customizado()
 
 # ==========================================
-# 1. CONEXÃO COM SQL SERVER
+# 1. CONEXÃO COM SQL SERVER (Via PyMSSQL)
 # ==========================================
 DB_CONFIG = {
     "user": "sa",
     "pass": "basf2533", 
-    "server": "contec1.duckdns.org:1433", # <-- Note os dois pontos e a porta 1433 aqui! Remova o \\connect
+    "server": "contec1.duckdns.org:1433", # Mantemos os dois pontos e a porta
     "database": "TEST_PY"
 }
 
-# Adicionado TrustServerCertificate=yes para evitar bloqueio do Linux
-conn_str = f"mssql+pyodbc://{DB_CONFIG['user']}:{DB_CONFIG['pass']}@{DB_CONFIG['server']}/{DB_CONFIG['database']}?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes"
+# String limpa usando pymssql (não precisa declarar driver do Windows)
+conn_str = f"mssql+pymssql://{DB_CONFIG['user']}:{DB_CONFIG['pass']}@{DB_CONFIG['server']}/{DB_CONFIG['database']}"
 
 @st.cache_resource
 def get_engine():
