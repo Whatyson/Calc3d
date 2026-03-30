@@ -99,7 +99,8 @@ DB_CONFIG = {
     "database": "TEST_PY"
 }
 
-conn_str = f"mssql+pyodbc://{DB_CONFIG['user']}:{DB_CONFIG['pass']}@{DB_CONFIG['server']}/{DB_CONFIG['database']}?driver=ODBC+Driver+17+for+SQL+Server"
+# Adicionado TrustServerCertificate=yes no final
+conn_str = f"mssql+pyodbc://{DB_CONFIG['user']}:{DB_CONFIG['pass']}@{DB_CONFIG['server']}/{DB_CONFIG['database']}?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes"
 
 @st.cache_resource
 def get_engine():
