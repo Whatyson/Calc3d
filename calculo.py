@@ -95,16 +95,15 @@ aplicar_estilo_customizado()
 DB_CONFIG = {
     "user": "sa",
     "pass": "basf2533", 
-    "server": "contec1.duckdns.org\\connect",
+    "server": "contec1.duckdns.org:1433", # <-- Note os dois pontos e a porta 1433 aqui! Remova o \\connect
     "database": "TEST_PY"
 }
 
-# Adicionado TrustServerCertificate=yes no final
+# Adicionado TrustServerCertificate=yes para evitar bloqueio do Linux
 conn_str = f"mssql+pyodbc://{DB_CONFIG['user']}:{DB_CONFIG['pass']}@{DB_CONFIG['server']}/{DB_CONFIG['database']}?driver=ODBC+Driver+17+for+SQL+Server&TrustServerCertificate=yes"
 
 @st.cache_resource
 def get_engine():
-    # fast_executemany=False para melhor compatibilidade com SQL 2008 R2
     return create_engine(conn_str, fast_executemany=False)
 
 engine = get_engine()
