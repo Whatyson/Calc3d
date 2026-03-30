@@ -40,18 +40,20 @@ def aplicar_estilo_customizado():
 
 aplicar_estilo_customizado()
 
-# ==========================================
-# 1. CONEXÃO COM SQL SERVER (Via PyMSSQL)
-# ==========================================
+# Use o IP direto que deu 'True' no teste
 DB_CONFIG = {
     "user": "sa",
     "pass": "basf2533", 
-    "server": "116.203.137.247:1433",
+    "server": "116.203.137.247", # IP direto
+    "port": "1433",
     "database": "TEST_PY"
 }
 
-# String de conexão para pymssql
-conn_str = f"mssql+pymssql://{DB_CONFIG['user']}:{DB_CONFIG['pass']}@{DB_CONFIG['server']}/{DB_CONFIG['database']}"
+# String formatada com tratamento de caracteres especiais na senha
+import urllib.parse
+password_escaped = urllib.parse.quote_plus(DB_CONFIG['pass'])
+
+conn_str = f"mssql+pymssql://{DB_CONFIG['user']}:{password_escaped}@{DB_CONFIG['server']}:{DB_CONFIG['port']}/{DB_CONFIG['database']}"
 
 @st.cache_resource
 def get_engine():
